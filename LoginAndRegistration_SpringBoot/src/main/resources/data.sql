@@ -1,0 +1,1 @@
+insert into USERS VALUES (null, 'Name', 'SName', 'login', '123');
