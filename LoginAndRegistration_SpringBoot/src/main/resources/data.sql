@@ -1,1 +1,1 @@
-insert into USERS VALUES (null, 'Name', 'SName', 'login', '123');
+insert into USER (name, surname, login, password) VALUES ('Name', 'SName', 'login', '123');
