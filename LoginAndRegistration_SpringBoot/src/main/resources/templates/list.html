@@ -5,6 +5,8 @@
     <title>list</title>
 </head>
 <body>
+<h4>Hello, <span th:text="${#authentication.getPrincipal().getUsername()}"></span></h4>
+
 <div th:switch="${users}">
     <h2 th:case="null">No users yet!</h2>
     <div th:case="*">
@@ -16,6 +18,7 @@
                 <th>Login</th>
                 <th>Name</th>
                 <th>Surname</th>
+                <th>Roles</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -26,14 +29,21 @@
                 <td th:text="${user.login}"></td>
                 <td th:text="${user.name}"></td>
                 <td th:text="${user.surname}"></td>
+                <td th:text="${user.role}"></td>
                 <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
                 <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/signup">Add a new user</a></p>
+    <p><a href="/register">Add a new user</a></p>
     <p><a href="/index">To index</a></p>
+
+    <form action="/logout" method="post">
+        <button type="submit">Logout</button>
+    </form>
 </div>
+
+
 </body>
 </html>

@@ -5,14 +5,25 @@
     <title>index</title>
 </head>
 <body>
-<div>
-    <a href="/list"><b>Look at list!</b></a>
+<div sec:authorize="isAuthenticated()">
+    <h3>Hello, <span th:text="${#authentication.getPrincipal().getUsername()}"></span></h3>
+<!--    <p sec:authentication="name"></p>-->
+    <h3>You role is: <span th:text="${#authentication.getPrincipal().authorities}"></span></h3>
 </div>
+
+<div sec:authorize="isAuthenticated()">
+    <a href="/list"><b>Look at list! (only for admin)</b></a>
+</div>
+
 <br>
-<div>
-    <a href="http://localhost:8080/loginForm">Already have account</a>
+<p sec:authorize="isAuthenticated()"><a href="/news">News (only for users)</a></p>
+
+<h4 sec:authorize="isAuthenticated()"><a href="/logout">Выйти</a></h4>
+
+<div sec:authorize="!isAuthenticated()">
+    <a href="/login">Login (only for not authenticated)</a>
     <br>
-    <a href="/signup">Don't have account</a>
+    <a href="/signup">Register (only for not authenticated)</a>
 </div>
 </body>
 </html>

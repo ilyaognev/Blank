@@ -42,4 +42,34 @@ spring.h2.console.enabled=true.
 
 В Controller используются аннотации @GetMapping, а не @PostMapping, т.к. spring не даёт использовать метод Post.
 
+----------
 
+**Spring Security**
+
+Классы MvcConfig и WebSecurityConfig служат конфигуратами для Spring Security.
+MvcConfig мапит страницы, которые нигде не будут описаны, сдесь SS узнаёт что такие страницы есть.
+WebSecurityConfig.configure - идёт настройка доступа к ресурсам.
+.csrf().disable() - отключил csrf защиту, иначе не работает логаут
+Метод userDetailsService в WebSecurityConfig создаёт пользователя в inMemory
+Этот блок добавлен для безопасного логаута (меняется на метод POST, а не GET, чистятся куки, идёт редирект на страницу входа):
+.logout()
+.logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+.invalidateHttpSession(true)
+.clearAuthentication(true)
+.deleteCookies("JSESSIONID")
+.logoutSuccessUrl("/login");
+
+Для корректной работы консоли H2 необходимо отключить X-Frame-Options in Spring Security. Для этого добавил в метод: WebSecurityConfig.configure cktle.oe. cnhjxre^
+http.headers().frameOptions().disable();
+
+Используется в БД имя роли с префиксом "ROLE_", т.к. такой префикс автоматически подставляет Spring Security (при проверке по .hasRole, но при проверке по .hasAuthority, префикс не учитывается)
+
+На странице регистрации пользователя (там же админ может добавить пользователя) add-user.html убрал action из формы. Т.о. первоначальный get запрос превращается в post запрос при нажатии кнопки, при этом значение запроса сохраняется (/register для админа или /signup для не аутенфицированных пользователей)
+
+ConnectionManager - больше не используется. Спринг сам пропертей берёт настройки для поднятия базы.
+
+Контроллеры распределены по ролям.
+
+@GetMapping("/register") и @PostMapping("/register") при разных типах запроса, происходят разные действия.
+
+В html страницах, благодаря thymeleaf осуществляется показ определенного текста в зависимости от роли юзера. Яркий пример на странице индекса.

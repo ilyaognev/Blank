@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Доступ запрещён</title>
+</head>
+<body>
+
+<div sec:authorize="isAuthenticated()">
+    <h3>Hello!</h3>
+    Твой логин:
+    <div sec:authentication="name"></div>
+    Твоя роль:
+    <div sec:authentication="principal.authorities"></div>
+</div>
+
+<h2>Доступ запрещён</h2>
+<div sec:authorize="hasRole('USER')">У пользователя с ролью User нет доступа на эту страницу</div>
+<div sec:authorize="hasRole('ADMIN')">У пользователя с ролью Admin нет доступа на эту страницу</div>
+<div sec:authorize="!isAuthenticated()">Неавторизованные пользователи не имеют доступа на эту страницу</div>
+
+<p><a href="/">To index</a></p>
+</body>
+</html>
