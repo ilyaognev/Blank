@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
 
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
-        return userFromDb.orElse(new User());
+        return userFromDb.orElseThrow(NullPointerException::new);
     }
 
     public List<User> allUsers() {

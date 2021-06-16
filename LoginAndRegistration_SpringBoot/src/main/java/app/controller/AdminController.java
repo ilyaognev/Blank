@@ -23,7 +23,7 @@ public class AdminController {
     }
 
     @PostMapping("/register") //DO REGISTRATION + redirect to index
-    public String addUser(@Valid User user, BindingResult result, Model model) {
+    public String addUser(@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             return "add-user";
         }

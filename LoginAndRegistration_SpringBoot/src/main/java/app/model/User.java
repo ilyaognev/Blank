@@ -1,6 +1,7 @@
 package app.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
+@NoArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +26,11 @@ public class User implements UserDetails {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
 
     //Особое внимание сюда. Этот метод позволяет увидеть роли
     @Override
@@ -58,7 +65,7 @@ public class User implements UserDetails {
 
     public String getRole() {
         StringBuilder result = new StringBuilder();
-        for (Role role : roles){
+        for (Role role : roles) {
             result.append(role.getName()).append(" ");
         }
         return result.toString().trim();
