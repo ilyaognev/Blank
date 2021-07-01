@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/head :: head"></head>
+
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+    <div sec:authorize="isAuthenticated()">
+        <h3>Hello! <span sec:authentication="name">name</span></h3>
+    </div>
+
+    <div>
+        <h2 class="alert-red">Доступ запрещён</h2>
+        <div class="alert-green" sec:authorize="hasRole('USER')">У пользователя с ролью User нет доступа на эту страницу</div>
+        <div class="alert-green" sec:authorize="hasRole('ADMIN')">У пользователя с ролью Admin нет доступа на эту страницу</div>
+        <div class="alert-green" sec:authorize="!isAuthenticated()">Неавторизованные пользователи не имеют доступа на эту страницу</div>
+        <a th:href="@{/}">
+            <button class="green-btn" type="button">To index</button>
+        </a>
+    </div>
+
+</div>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>

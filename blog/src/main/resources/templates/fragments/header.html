@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<header th:fragment="header">
+  <div class="topnav">
+    <a class="active" th:href="@{/}">Home</a>
+    <span sec:authorize="hasRole('ROLE_USER')">
+        <a class="left" th:href="@{/postForm}">Add Post</a>
+        </span>
+    <span sec:authorize="isAuthenticated()">
+        <a class="right" th:href="@{/logout}">Logout</a>
+        </span>
+    <span sec:authorize="isAuthenticated()">
+            <a class="right">Welcome <span sec:authentication="name">name?</span></a>
+        </span>
+    <span sec:authorize="!isAuthenticated()">
+        <a class="right" th:href="@{/login}">Login</a>
+        <a class="right" th:href="@{/registration}">Registration</a>
+        </span>
+  </div>
+  <div class="header">
+    <h2>Blog App with Spring Boot</h2>
+  </div>
+</header>
+</body>
+</html>

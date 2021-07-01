@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/fragments/head :: head"></head>
+<body>
+
+<div th:replace="/fragments/header :: header"></div>
+
+<div class="container">
+    <div class="post">
+        <h5 class="create-date" th:text="'Create by ' + ${post.user.username} + ' on ' + ${#dates.format(post.creationDate, 'yyyy MMMM dd')}">Creation date and by whom</h5>
+<!--        <h5 class="create-date">Create by <span th:text="${post.user.username}">Username</span> on <span th:text="${#dates.format(post.creationDate, 'yyyy MMMM dd')}">Date</span></h5>-->
+        <h2 th:text="${post.title}">Title</h2>
+        <div class="img"></div>
+        <p th:text="${post.body}">body text</p>
+        <div class="align-right" sec:authorize="isAuthenticated()" th:if="${isOwner}">
+            <a th:href="@{'/editPost/{id}'(id=${post.id})}">
+                <button class="green-btn blue-btn" type="button">Edit</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+
+</body>
+</html>
