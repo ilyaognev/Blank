@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
 >
-<head th:replace="/fragments/head :: head"></head>
+<head th:replace="fragments/head :: head"></head>
 
 <body>
 
-<div th:replace="/fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 
 <div class="container">
 <div th:if="${param.error}">
@@ -22,6 +22,6 @@
 
 </div>
 
-<footer th:replace="/fragments/footer :: footer"></footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
