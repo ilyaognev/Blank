@@ -16,13 +16,13 @@ public class UserServiceTest extends AbstractSpringTest {
     @Autowired
     UserService userService;
 
-    @BeforeClass //@BeforeAll for Junit5. @BeforeClass for Junit4
+    @BeforeClass
     public static void globalSetUp() {
         System.out.println("Initial setup...");
         System.out.println("Code executes only once");
     }
 
-    @BeforeEach //@BeforeEach for Junit5. @Before for Junit4
+    @BeforeEach
     public void setUp() {
         System.out.println("Code executes before each test method");
     }

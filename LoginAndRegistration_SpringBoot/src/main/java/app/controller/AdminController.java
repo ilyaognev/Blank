@@ -46,8 +46,8 @@ public class AdminController {
         return "update-user";
     }
 
-    @PostMapping("/update/{id}") //DO EDIT USER DATA + redirect to list of users
-    public String updateUser(@PathVariable("id") long id, @Valid User user,
+    @PostMapping("/update/{userId}") //DO EDIT USER DATA + redirect to list of users
+    public String updateUser(@PathVariable("userId") long id, @Valid User user,
                              BindingResult result) {
         if (result.hasErrors()) {
             user.setId(id);
@@ -58,8 +58,8 @@ public class AdminController {
         return "redirect:/list";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) {
+    @GetMapping("/delete/{userId}")
+    public String deleteUser(@PathVariable("userId") long id) {
         userService.deleteUser(id);
         return "redirect:/list";
     }
