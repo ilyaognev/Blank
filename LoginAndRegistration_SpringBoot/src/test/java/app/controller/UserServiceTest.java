@@ -39,8 +39,6 @@ public class UserServiceTest extends AbstractSpringTest {
         assertThat(userService.allUsers().size(), is(3));
         userService.deleteUser(1L);
         assertThat(userService.allUsers().size(), is(2));
-        //ожидаем что после удаления одного юзера, их становится на одного меньше
         assertThrows(NullPointerException.class, () -> userService.findUserById(1L));
-        //ожидаем что при обращении к удалённому id пользователя будет исключение. Это прописано в методе findUserById
     }
 }

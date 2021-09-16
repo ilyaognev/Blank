@@ -53,7 +53,11 @@ public class UserService implements UserDetailsService {
         User userFromDB = userRepository.findByLogin(user.getLogin());
 
         if (userFromDB != null) {
-            return false;
+            userFromDB.setName(user.getName());
+            userFromDB.setSurname(user.getSurname());
+            userFromDB.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userRepository.save(userFromDB);
+            return true;
         }
 
         user.setRoles(Collections.singleton(new Role(2L, "ROLE_USER")));
