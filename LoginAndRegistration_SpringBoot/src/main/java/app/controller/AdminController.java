@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -46,9 +44,8 @@ public class AdminController {
         return "update-user";
     }
 
-    @PostMapping("/update/{userId}") //DO EDIT USER DATA + redirect to list of users
-    public String updateUser(@PathVariable("userId") long id, @Valid User user,
-                             BindingResult result) {
+    @PutMapping("/update/{userId}")
+    public String updateUser(@PathVariable("userId") long id, @Valid User user, BindingResult result) {
         if (result.hasErrors()) {
             user.setId(id);
             return "redirect:/list";
@@ -58,7 +55,7 @@ public class AdminController {
         return "redirect:/list";
     }
 
-    @GetMapping("/delete/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public String deleteUser(@PathVariable("userId") long id) {
         userService.deleteUser(id);
         return "redirect:/list";
