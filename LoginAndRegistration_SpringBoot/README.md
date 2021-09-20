@@ -45,7 +45,7 @@ spring.h2.console.enabled=true.
 Основной класс App (да и всё приложение) лежит в отдельном пакете (в нашем случае пакет: app), это сделано специально, иначе spring не заработает.
 
 ~~В Controller используются аннотации @GetMapping, а не @PostMapping, т.к. spring не даёт использовать метод Post.~~ </br>
-В Controller можно используются только аннотации @GetMapping и @PostMapping, но не @PutMapping и @DeleteMapping, т.к. thymeleaf обработает запросы DELETE и PUT корректно.
+В Controller можно используются только аннотации @GetMapping и @PostMapping, но не @PutMapping и @DeleteMapping, т.к. thymeleaf сам сделает запросы DELETE и PUT там где это необходимо.
 Но, если хочется, то можно использовать @PutMapping и @DeleteMapping, для этого:
 * в проперти файле ставится свойство: spring.mvc.hiddenmethod.filter.enabled=true
 * выставляются соответствующие аннотации @PutMapping и @DeleteMapping у нужных методов

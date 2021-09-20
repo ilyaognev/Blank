@@ -41,4 +41,28 @@ public class UserServiceTest extends AbstractSpringTest {
         assertThat(userService.allUsers().size(), is(2));
         assertThrows(NullPointerException.class, () -> userService.findUserById(1L));
     }
+
+    @Test
+    public void updateUser() {
+    }
+
+    @Test
+    public void allUsers() {
+    }
+
+    @Test
+    public void findUserById() {
+    }
+
+    @Test
+    public void findUserByIdNotFound() {
+    }
+
+    @Test
+    public void deleteUserNotFound() {
+    }
+
+    @Test
+    public void duplicateLoginCreate() {
+    }
 }
