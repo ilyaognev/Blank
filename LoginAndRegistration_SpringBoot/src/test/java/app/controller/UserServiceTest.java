@@ -2,6 +2,7 @@ package app.controller;
 
 import app.AbstractSpringTest;
 import app.model.User;
+import app.repository.UserRepository;
 import app.service.UserService;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UserServiceTest extends AbstractSpringTest {
     @Autowired
     UserService userService;
+    @Autowired
+    UserRepository userRepository;
 
     @BeforeClass
     public static void globalSetUp() {
@@ -44,6 +47,13 @@ public class UserServiceTest extends AbstractSpringTest {
 
     @Test
     public void updateUser() {
+        User userFromDB = userRepository.findByLogin("user");
+        userFromDB.setName("New Name");
+        userFromDB.setSurname("New Surname");
+        userService.saveUser(userFromDB);
+        assertThat(userService.allUsers().size(), is(3));
+        assertThat(userRepository.findByLogin("user").getName(), is("New Name"));
+        assertThat(userRepository.findByLogin("user").getSurname(), is("New Surname"));
     }
 
     @Test
