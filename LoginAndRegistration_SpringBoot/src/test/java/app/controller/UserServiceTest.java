@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserServiceTest extends AbstractSpringTest {
     @Autowired
@@ -51,9 +51,11 @@ public class UserServiceTest extends AbstractSpringTest {
         userFromDB.setName("New Name");
         userFromDB.setSurname("New Surname");
         userService.saveUser(userFromDB);
-        assertThat(userService.allUsers().size(), is(3));
-        assertThat(userRepository.findByLogin("user").getName(), is("New Name"));
-        assertThat(userRepository.findByLogin("user").getSurname(), is("New Surname"));
+        assertAll("update user",
+                () -> assertEquals(3, userService.allUsers().size()),
+                () -> assertEquals("New Name", userRepository.findByLogin("user").getName()),
+                () -> assertEquals("New Surname", userRepository.findByLogin("user").getSurname())
+        );
     }
 
     @Test
