@@ -60,10 +60,13 @@ public class UserServiceTest extends AbstractSpringTest {
 
     @Test
     public void allUsers() {
+        assertThat(userService.allUsers().size(), is(3));
     }
 
     @Test
     public void findUserById() {
+        User user = userService.findUserById(1L);
+        assertThat(user.getName(), is("Name"));
     }
 
     @Test
