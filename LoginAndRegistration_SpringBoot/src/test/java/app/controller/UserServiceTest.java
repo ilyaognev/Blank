@@ -71,10 +71,12 @@ public class UserServiceTest extends AbstractSpringTest {
 
     @Test
     public void findUserByIdNotFound() {
+        assertThrows(NullPointerException.class, () -> userService.findUserById(10L));
     }
 
     @Test
     public void deleteUserNotFound() {
+        assertThat(userService.deleteUser(10L), is(false));
     }
 
     @Test
