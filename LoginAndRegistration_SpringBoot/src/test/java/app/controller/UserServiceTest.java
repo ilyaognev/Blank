@@ -81,5 +81,6 @@ public class UserServiceTest extends AbstractSpringTest {
 
     @Test
     public void duplicateLoginCreate() {
+        //сохранится количество юзеров + у старого юзера не изменятся поля
     }
 }
