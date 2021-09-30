@@ -18,6 +18,8 @@ public class UserServiceTest extends AbstractSpringTest {
     UserService userService;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AdminController adminController;
 
     @BeforeClass
     public static void globalSetUp() {
@@ -81,6 +83,10 @@ public class UserServiceTest extends AbstractSpringTest {
 
     @Test
     public void duplicateLoginCreate() {
-        //сохранится количество юзеров + у старого юзера не изменятся поля
+        assertThat(userService.allUsers().size(), is(3));
+        userService.saveUser(new User("Wrong name", "user","user","123"));
+        assertThat(userService.allUsers().size(), is(3));
+        //assertThat(userRepository.findByLogin("user").getName(), is("Name"));
+        //TODO check Controller but Service
     }
 }

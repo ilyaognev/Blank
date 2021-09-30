@@ -32,6 +32,13 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public User(String name, String surname, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+    }
+
     //Особое внимание сюда. Этот метод позволяет увидеть роли
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
